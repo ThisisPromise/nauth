@@ -1,5 +1,3 @@
-
-
 "use client"
 
 import Link from "next/link"
@@ -13,13 +11,21 @@ import MissionSection from "./components/mission-section"
 import TechnologySection from "./components/technology"
 import Footer from "./components/footer"
 import Image from 'next/image'
-import { useState, useEffect } from 'react';
-
-
+import { useState, useEffect, useRef } from 'react';
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [currentSection, setCurrentSection] = useState('home');
+  
+  // Add refs for each section
+  const homeRef = useRef(null);
+  const aboutRef = useRef(null);
+  const whyNauthRef = useRef(null);
+  const missionRef = useRef(null);
+  const technologyRef = useRef(null);
+  const roadmapRef = useRef(null);
 
+  // Handle navbar background change on scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50); // adjust threshold as you like
@@ -27,6 +33,83 @@ export default function Home() {
   
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Handle URL path change on section visibility
+  useEffect(() => {
+    const sectionRefs = [
+      { id: 'home', ref: homeRef },
+      { id: 'about', ref: aboutRef },
+      { id: 'why-nauth', ref: whyNauthRef },
+      { id: 'mission', ref: missionRef },
+      { id: 'technology', ref: technologyRef },
+      { id: 'roadmap', ref: roadmapRef }
+    ];
+
+    const observerOptions = {
+      root: null, // use viewport as root
+      rootMargin: '0px',
+      threshold: 0.3 // Reduced threshold to 30%
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id;
+          setCurrentSection(sectionId);
+          
+          // Log for debugging
+          console.log(`Section in view: ${sectionId}`);
+          
+          // Update URL without reloading the page - just use the section ID
+          if (sectionId === 'home') {
+            window.history.replaceState(null, '', '/');
+          } else {
+            window.history.replaceState(null, '', `/${sectionId}`);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all sections
+    sectionRefs.forEach(({ id, ref }) => {
+      if (ref.current) {
+        observer.observe(ref.current);
+        console.log(`Observing section: ${id}`);
+      } else {
+        console.warn(`Ref for section ${id} is null or undefined`);
+      }
+    });
+
+    return () => {
+      sectionRefs.forEach(({ ref }) => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      });
+    };
+  }, []);
+
+  // Add a scroll listener specifically for the roadmap section
+  useEffect(() => {
+    const checkRoadmapVisibility = () => {
+      if (!roadmapRef.current) return;
+      
+      const rect = roadmapRef.current.getBoundingClientRect();
+      const isVisible = 
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.7 &&
+        rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) * 0.3;
+      
+      if (isVisible) {
+        setCurrentSection('roadmap');
+        window.history.replaceState(null, '', '/roadmap');
+      }
+    };
+    
+    window.addEventListener('scroll', checkRoadmapVisibility);
+    return () => window.removeEventListener('scroll', checkRoadmapVisibility);
   }, []);
 
   return (
@@ -42,29 +125,28 @@ export default function Home() {
             priority 
           />
           <nav className="hidden md:flex space-x-6">
-            <Link href="#home" className="text-white hover:text-purple-300">
+            <Link href="#home" className={`text-white hover:text-purple-300 ${currentSection === 'home' ? 'text-purple-300' : ''}`}>
               Home
             </Link>
-            <Link href="#about" className="text-white hover:text-purple-300">
+            <Link href="#about" className={`text-white hover:text-purple-300 ${currentSection === 'about' ? 'text-purple-300' : ''}`}>
               About
             </Link>
-            <Link href="#why-nauth" className="text-white hover:text-purple-300">
+            <Link href="#why-nauth" className={`text-white hover:text-purple-300 ${currentSection === 'why-nauth' ? 'text-purple-300' : ''}`}>
               Why Nauth
             </Link>
-            <Link href="#mission" className="text-white hover:text-purple-300">
+            <Link href="#mission" className={`text-white hover:text-purple-300 ${currentSection === 'mission' ? 'text-purple-300' : ''}`}>
               Our Mission
             </Link>
-            <Link href="#roadmap" className="text-white hover:text-purple-300">
+            <Link href="#roadmap" className={`text-white hover:text-purple-300 ${currentSection === 'roadmap' ? 'text-purple-300' : ''}`}>
               Roadmap
             </Link>
-
           </nav>
           <div className="hidden md:flex space-x-3 items-center">
-          <Link href="https://x.com/Nauthauth?t=ntZb3owKLeiea25v3M98HQ&s=09" className="text-white hover:text-purple-300">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-</Link>
+            <Link href="https://x.com/Nauthauth?t=ntZb3owKLeiea25v3M98HQ&s=09" className="text-white hover:text-purple-300">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </Link>
           </div>
 
           {/* Mobile Menu Button - Only visible on mobile */}
@@ -74,34 +156,35 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Sections */}
-      <section id="home">
+      {/* Sections - Added refs to each section */}
+      <section id="home" ref={homeRef}>
         <HomeSection />
       </section>
 
-      <section id="about">
+      <section id="about" ref={aboutRef}>
         <AboutSection />
       </section>
 
-      <section id="why-nauth">
-  <WhyNauthSection />
-</section>
+      <section id="why-nauth" ref={whyNauthRef}>
+        <WhyNauthSection />
+      </section>
 
-<section id="mission" >
-  <MissionSection />
-</section>
+      <section id="mission" ref={missionRef}>
+        <MissionSection />
+      </section>
 
-<section id="technology" >
-  <TechnologySection />
-</section>
+      <section id="technology" ref={technologyRef}>
+        <TechnologySection />
+      </section>
 
-      <section id="roadmap">
+      {/* Added data-section attribute for additional identifier */}
+      <section id="roadmap" ref={roadmapRef} data-section="roadmap">
         <RoadmapSection />
       </section>
 
       {/* Partners */}
       <div className="container mx-auto px-4 py-8 border-t border-gray-800">
-    <Footer />
+        <Footer />
       </div>
 
       {/* Background Elements */}
