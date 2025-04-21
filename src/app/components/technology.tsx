@@ -232,20 +232,7 @@ export default function TechnologySection() {
         >
           <div className="relative inline-block">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-            <button className="relative px-7 py-4 bg-black rounded-lg leading-none flex items-center">
-              <span className="text-gray-200 group-hover:text-gray-100 transition duration-200">
-                Explore Documentation
-              </span>
-              <svg
-                className="ml-2 w-5 h-5 text-pink-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </button>
+
           </div>
         </motion.div>
       </div>
