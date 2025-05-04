@@ -317,7 +317,7 @@ export default function MissionSection() {
   className="mt-16 text-center"
 >
   <motion.a 
-    href="https://x.com/Nauthauth?t=ntZb3owKLeiea25v3M98HQ&s=09"
+    href="https://x.com/NauthSW?t=LvFPQJZqNKevpQhmXaJXkQ&s=08"
     target="_blank" 
     rel="noopener noreferrer"
     className="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:-translate-y-1"
