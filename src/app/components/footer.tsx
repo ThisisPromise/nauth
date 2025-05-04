@@ -61,7 +61,7 @@ export default function Footer() {
   
     onClick={(e) => {
       e.stopPropagation();
-      window.open("https://x.com/Nauthauth?t=ntZb3owKLeiea25v3M98HQ&s=09", "_blank");
+      window.open("https://x.com/NauthSW?t=LvFPQJZqNKevpQhmXaJXkQ&s=08", "_blank");
     }}
     style={{
       display: "flex",
@@ -75,7 +75,7 @@ export default function Footer() {
   >
     {/* X Logo as a simple text character to avoid SVG issues */}
     <span style={{ marginRight: "8px", fontWeight: "bold" }}>𝕏</span>
-    @Nauthauth
+    @NauthSW
   </a>
 </div>
 </div>
