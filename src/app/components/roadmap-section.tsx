@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function RoadmapSection() {
-  // For responsive design
+ 
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,6 @@ export default function RoadmapSection() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -136,7 +135,6 @@ export default function RoadmapSection() {
         </motion.div>
 
         <div className="relative">
-          {/* Vertical line for desktop view */}
           {!isMobile && (
             <motion.div 
               className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-purple-700/40"
@@ -167,7 +165,6 @@ export default function RoadmapSection() {
                   variants={itemVariants}
                 >
                   <div className="flex flex-col md:flex-row items-center">
-                    {/* Left content (desktop only) */}
                     {!isMobile && isLeft && (
                       <div className="md:w-1/2 md:pr-12 md:text-right">
                         <motion.div 
@@ -197,12 +194,10 @@ export default function RoadmapSection() {
                       </div>
                     )}
 
-                    {/* Placeholder div for desktop layout when content is on right */}
                     {!isMobile && !isLeft && (
                       <div className="md:w-1/2"></div>
                     )}
 
-                    {/* Center node */}
                     <div className="relative">
                       <motion.div 
                         className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center z-10 shadow-lg"
@@ -217,7 +212,7 @@ export default function RoadmapSection() {
                       >
                         <span className="font-bold text-white text-lg">{number}</span>
                       </motion.div>
-                      {/* Connecting lines */}
+
                       {index < phases.length - 1 && !isMobile && (
                         <motion.div 
                           className="absolute top-14 left-1/2 transform -translate-x-1/2 w-1 h-16 bg-purple-600/50"
@@ -228,7 +223,6 @@ export default function RoadmapSection() {
                       )}
                     </div>
 
-                    {/* Right content (desktop only) */}
                     {!isMobile && !isLeft && (
                       <div className="md:w-1/2 md:pl-12 md:text-left">
                         <motion.div 
@@ -258,12 +252,10 @@ export default function RoadmapSection() {
                       </div>
                     )}
 
-                    {/* Placeholder div for desktop layout when content is on left */}
                     {!isMobile && isLeft && (
                       <div className="md:w-1/2"></div>
                     )}
 
-                    {/* Mobile view card - only show on mobile */}
                     {isMobile && (
                       <motion.div 
                         className="w-full mt-6"
