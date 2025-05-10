@@ -35,7 +35,6 @@ export default function HomeSection() {
             </div>
           </div>
           <div className="relative h-[300px] md:h-[400px]">
-            {/* NFT Images */}
             <div className="absolute  top-0 right-0 w-48 h-48 transform rotate-12 z-10">
               <div className="w-full h-full rounded-lg bg-gradient-to-br from-blue-400 via-pink-500 to-red-500 shadow-lg">
                       <Image 
@@ -68,7 +67,6 @@ export default function HomeSection() {
             </div>
 
   
-            {/* Decorative Elements */}
             <div className="absolute top-10 right-40 text-white opacity-80">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
