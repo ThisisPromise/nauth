@@ -44,7 +44,7 @@ export default function TechnologySection() {
       }
   ]
   
-  // Animation variants
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -70,7 +70,6 @@ export default function TechnologySection() {
   
   return (
     <div className="relative py-24 overflow-hidden bg-gradient-to-b from-[#0e0420] to-[#14052e]">
-      {/* Decorative background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-30"></div>
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-30"></div>
@@ -98,8 +97,6 @@ export default function TechnologySection() {
             Advanced systems working together to create a seamless verification experience
           </p>
         </motion.div>
-        
-        {/* Animated Flow Diagram */}
         <motion.div
           ref={containerRef}
           initial="hidden"
@@ -109,7 +106,6 @@ export default function TechnologySection() {
           className="mb-24"
         >
           <div className="relative max-w-4xl mx-auto">
-            {/* Connection lines */}
             <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet">
               <motion.path 
                 initial={{ pathLength: 0, opacity: 0 }}
@@ -128,8 +124,7 @@ export default function TechnologySection() {
                 </linearGradient>
               </defs>
             </svg>
-          
-            {/* Technology flow steps */}
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <motion.div 
                 variants={slideUpVariants}
@@ -180,7 +175,6 @@ export default function TechnologySection() {
           </div>
         </motion.div>
 
-        {/* Technology features */}
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -198,10 +192,9 @@ export default function TechnologySection() {
               <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-indigo-900/10 rounded-xl"></div>
               
               <div className="group relative bg-gray-900/50 backdrop-blur-md rounded-xl p-8 border border-gray-800 hover:border-purple-500/50 transition-all duration-300 h-full z-10 overflow-hidden">
-                {/* Animated background pulse */}
+      
                 <div className="absolute -inset-1 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent skew-x-12 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-1000 group-hover:animate-pulse"></div>
                 
-                {/* Tech icon with gradient background */}
                 <div className={`absolute -right-6 -top-6 w-24 h-24 rounded-full bg-gradient-to-br ${tech.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
                 
                 <div className="flex items-start">
@@ -211,8 +204,7 @@ export default function TechnologySection() {
                     <p className="text-gray-400">{tech.description}</p>
                   </div>
                 </div>
-                
-                {/* Decorative dots */}
+              
                 <div className="absolute bottom-3 right-3 flex space-x-1">
                   <div className="w-1 h-1 rounded-full bg-purple-500 opacity-30"></div>
                   <div className="w-1 h-1 rounded-full bg-pink-500 opacity-30"></div>
@@ -222,8 +214,7 @@ export default function TechnologySection() {
             </motion.div>
           ))}
         </motion.div>
-        
-        {/* Bottom CTA */}
+
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
