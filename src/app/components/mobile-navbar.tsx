@@ -9,28 +9,25 @@ import { Menu, X } from "lucide-react"
 export default function MobileNavbar() {
   const [isOpen, setIsOpen] = useState(false)
 
-  // Handle body scroll locking when the menu is open
   useEffect(() => {
     if (isOpen) {
-      // Save the current scroll position
+
       const scrollY = window.scrollY
       
-      // Add styles to prevent scrolling
       document.body.style.position = 'fixed'
       document.body.style.top = `-${scrollY}px`
       document.body.style.width = '100%'
     } else {
-      // Remove scroll lock styles when menu is closed
+
       const scrollY = document.body.style.top
       document.body.style.position = ''
       document.body.style.top = ''
       document.body.style.width = ''
       
-      // Restore scroll position
       window.scrollTo(0, parseInt(scrollY || '0') * -1)
     }
     
-    // Clean up effect
+
     return () => {
       document.body.style.position = ''
       document.body.style.top = ''
@@ -48,7 +45,6 @@ export default function MobileNavbar() {
         <Menu size={24} />
       </button>
 
-      {/* Mobile Menu Overlay */}
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -56,7 +52,6 @@ export default function MobileNavbar() {
         onClick={toggleMenu}
       ></div>
 
-      {/* Mobile Menu Drawer */}
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-[#0e0420] z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
