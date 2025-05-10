@@ -26,8 +26,7 @@ export default function MissionSection() {
 
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8])
-  
-  // Globe animation
+
   const globeRef = useRef<HTMLDivElement>(null)
   
   useEffect(() => {
@@ -52,8 +51,7 @@ export default function MissionSection() {
       window.removeEventListener('mousemove', handleMouseMove)
     }
   }, [])
-  
-  // Mobile animation for globe
+
   useEffect(() => {
     if (!globeRef.current || !isMobile) return
     
@@ -80,7 +78,6 @@ export default function MissionSection() {
       style={{ opacity, scale }}
       className="py-24 relative overflow-hidden"
     >
-      {/* Background decorative elements - Reverted to purple/pink glow colors */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-purple-500 rounded-full filter blur-[150px] opacity-20 animate-pulse"></div>
         <div className="absolute top-1/3 right-1/4 w-1/3 h-1/3 bg-pink-500 rounded-full filter blur-[120px] opacity-15 animate-pulse" style={{ animationDelay: '1s' }}></div>
@@ -208,7 +205,6 @@ export default function MissionSection() {
               <div className="absolute inset-0 rounded-full overflow-hidden">
                 <div className="absolute inset-0 bg-[url('/grid.svg')] bg-cover opacity-20"></div>
                 
-                {/* Animated paths/connections representing global network */}
                 <svg viewBox="0 0 400 400" className="absolute inset-0 w-full h-full">
                   <path 
                     d="M100,100 Q200,50 300,120" 
@@ -234,7 +230,6 @@ export default function MissionSection() {
                     style={{ animationDelay: '0.5s' }}
                   />
                   
-                  {/* Connection points */}
                   <circle cx="100" cy="100" r="4" fill="#a855f7" className="animate-ping" style={{ animationDuration: '3s' }} />
                   <circle cx="300" cy="120" r="4" fill="#a855f7" className="animate-ping" style={{ animationDuration: '4s', animationDelay: '1s' }} />
                   <circle cx="80" cy="200" r="4" fill="#db2777" className="animate-ping" style={{ animationDuration: '3.5s', animationDelay: '0.5s' }} />
@@ -243,8 +238,7 @@ export default function MissionSection() {
                   <circle cx="330" cy="270" r="4" fill="#7c3aed" className="animate-ping" style={{ animationDuration: '4.2s', animationDelay: '0.3s' }} />
                 </svg>
               </div>
-              
-              {/* Tech stack floating around the globe - with improved animations */}
+
               <motion.div 
                 animate={{ 
                   rotate: 360,
@@ -323,7 +317,7 @@ export default function MissionSection() {
     className="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:-translate-y-1"
     whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(168, 85, 247, 0.5)" }}
     whileTap={{ scale: 0.95 }}
-    style={{ display: 'inline-flex' }} // Force inline-flex as a style property
+    style={{ display: 'inline-flex' }} 
   >
     <span>Join Our Mission</span>
     <svg
