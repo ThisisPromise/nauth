@@ -4,10 +4,8 @@ import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 
 export default function AboutSection() {
-  // Particle canvas reference for animation
   const canvasRef = useRef<HTMLCanvasElement>(null)
   
-  // Initialize particles animation on component mount
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -15,7 +13,6 @@ export default function AboutSection() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
     
-    // Set canvas dimensions to match container
     const resizeCanvas = () => {
       const parent = canvas.parentElement
       if (parent) {
@@ -26,15 +23,13 @@ export default function AboutSection() {
     
     resizeCanvas()
     const particles: Particle[] = []
-    
-    // Handle window resize to maintain responsive canvas
+
     const handleResize = () => {
       resizeCanvas()
     }
     
     window.addEventListener('resize', handleResize)
     
-    // Particle class for animation
     class Particle {
       x: number
       y: number
@@ -49,7 +44,6 @@ export default function AboutSection() {
         this.size = Math.random() * 2 + 0.5
         this.speedX = Math.random() * 0.8 - 0.4
         this.speedY = Math.random() * 0.8 - 0.4
-        // Purple tones for particles to match the theme
         this.color = `rgba(${120 + Math.random() * 50}, ${70 + Math.random() * 30}, ${190 + Math.random() * 60}, ${0.2 + Math.random() * 0.3})`
       }
       
@@ -57,7 +51,6 @@ export default function AboutSection() {
         this.x += this.speedX
         this.y += this.speedY
         
-        // Bounce off edges
         if (this.x < 0 || this.x > canvas.width) {
           this.speedX = -this.speedX
         }
@@ -75,12 +68,10 @@ export default function AboutSection() {
       }
     }
     
-    // Initialize particles - reduced count for better performance
     for (let i = 0; i < 30; i++) {
       particles.push(new Particle())
     }
     
-    // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       
@@ -99,7 +90,6 @@ export default function AboutSection() {
     }
   }, [])
 
-  // Intersection Observer hook for triggering animations
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -119,21 +109,16 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="relative py-16 overflow-hidden bg-gray-900">
-      {/* Particle background */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-20 z-0"></canvas>
       
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-4xl mx-auto relative z-10">
-          {/* Section title */}
           <div className="text-center mb-12 animate-on-scroll transition-all duration-700 opacity-0 translate-y-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">About</h2>
             <div className="w-20 h-1 bg-purple-600 mx-auto animate-pulse"></div>
           </div>
 
-          {/* Main content */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-20 px-4 sm:px-0">
-            {/* NFT Image container - Fixed centering on mobile */}
-{/* NFT Image container - Fixed centering on mobile */}
 <div className="flex justify-center md:justify-start">
   <div className="relative h-64 md:h-80 w-full animate-on-scroll transition-all duration-700 opacity-0 md:-translate-x-10">
     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 animate-pulse rounded-lg"></div>
@@ -152,7 +137,6 @@ export default function AboutSection() {
         }}
       />
     </div>
-    {/* Decorative elements */}
     <div className="absolute -top-3 -left-3 w-10 h-10 border-t-2 border-l-2 border-purple-500 opacity-70 animate-spin-slow"></div>
     <div className="absolute -bottom-3 -right-3 w-10 h-10 border-b-2 border-r-2 border-pink-500 opacity-70 animate-spin-slow"></div>
   </div>
@@ -164,7 +148,6 @@ export default function AboutSection() {
   </p>
 
               <div className="space-y-4">
-                {/* Step 1 */}
                 <div className="flex items-start group relative p-3 sm:p-4 rounded-lg transition-all duration-300 hover:bg-gray-800/40">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center mr-3 sm:mr-4 mt-1 flex-shrink-0 shadow-lg shadow-purple-500/20 group-hover:shadow-purple-500/40 transition-all duration-300">
                     <svg width="16" height="16" className="sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,12 +167,9 @@ export default function AboutSection() {
                       Creators upload their digital artwork to be authenticated.
                     </p>
                   </div>
-                  
-                  {/* Background glow on hover */}
+
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 to-purple-600/0 opacity-0 group-hover:opacity-10 rounded-lg transition-all duration-300"></div>
                 </div>
-
-                {/* Step 2 */}
                 <div className="flex items-start group relative p-3 sm:p-4 rounded-lg transition-all duration-300 hover:bg-gray-800/40">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-600 to-purple-800 flex items-center justify-center mr-3 sm:mr-4 mt-1 flex-shrink-0 shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-all duration-300">
                     <svg width="16" height="16" className="sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -212,8 +192,6 @@ export default function AboutSection() {
                   
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 to-blue-600/0 opacity-0 group-hover:opacity-10 rounded-lg transition-all duration-300"></div>
                 </div>
-
-                {/* Step 3 */}
                 <div className="flex items-start group relative p-3 sm:p-4 rounded-lg transition-all duration-300 hover:bg-gray-800/40">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-pink-600 to-purple-800 flex items-center justify-center mr-3 sm:mr-4 mt-1 flex-shrink-0 shadow-lg shadow-pink-500/20 group-hover:shadow-pink-500/40 transition-all duration-300">
                     <svg width="16" height="16" className="sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -235,8 +213,6 @@ export default function AboutSection() {
                   
                   <div className="absolute inset-0 bg-gradient-to-r from-pink-600/0 to-pink-600/0 opacity-0 group-hover:opacity-10 rounded-lg transition-all duration-300"></div>
                 </div>
-
-                {/* Step 4 */}
                 <div className="flex items-start group relative p-3 sm:p-4 rounded-lg transition-all duration-300 hover:bg-gray-800/40">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-800 flex items-center justify-center mr-3 sm:mr-4 mt-1 flex-shrink-0 shadow-lg shadow-indigo-500/20 group-hover:shadow-indigo-500/40 transition-all duration-300">
                     <svg width="16" height="16" className="sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -261,13 +237,10 @@ export default function AboutSection() {
               </div>
             </div>
           </div>
-
-          {/* Our Process section with cards - Fixed spacing */}
           <div className="mt-24">
             <h3 className="text-2xl md:text-3xl font-bold mb-12 text-center text-white animate-on-scroll transition-all duration-700 opacity-0 translate-y-10">Our Process</h3>
             
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              {/* Card 1 - Upload Art */}
               <div className="rounded-lg bg-black p-5 relative overflow-hidden group hover:-translate-y-2 hover:shadow-lg animate-on-scroll transition-opacity duration-700 opacity-0 transform-gpu">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-20 group-hover:opacity-30 transition-opacity"></div>
                 <div className="absolute inset-0 border border-purple-500 rounded-lg shadow-lg shadow-purple-500/20 group-hover:shadow-purple-500/30 transition-all"></div>
@@ -285,7 +258,6 @@ export default function AboutSection() {
                 </div>
               </div>
 
-              {/* Card 2 - AI Authentication */}
               <div className="rounded-lg bg-black p-5 relative overflow-hidden group hover:-translate-y-2 hover:shadow-lg animate-on-scroll transition-opacity duration-700 opacity-0 transform-gpu">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 opacity-20 group-hover:opacity-30 transition-opacity"></div>
                 <div className="absolute inset-0 border border-blue-500 rounded-lg shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/30 transition-all"></div>
@@ -303,7 +275,7 @@ export default function AboutSection() {
                 </div>
               </div>
 
-              {/* Card 3 - Provenance */}
+
               <div className="rounded-lg bg-black p-5 relative overflow-hidden group hover:-translate-y-2 hover:shadow-lg animate-on-scroll transition-opacity duration-700 opacity-0 transform-gpu">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-500 opacity-20 group-hover:opacity-30 transition-opacity"></div>
                 <div className="absolute inset-0 border border-green-500 rounded-lg shadow-lg shadow-green-500/20 group-hover:shadow-green-500/30 transition-all"></div>
@@ -321,7 +293,6 @@ export default function AboutSection() {
                 </div>
               </div>
 
-              {/* Card 4 - Verified & Minted */}
               <div className="rounded-lg bg-black p-5 relative overflow-hidden group hover:-translate-y-2 hover:shadow-lg animate-on-scroll transition-opacity duration-700 opacity-0 transform-gpu">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-orange-500 opacity-20 group-hover:opacity-30 transition-opacity"></div>
                 <div className="absolute inset-0 border border-yellow-500 rounded-lg shadow-lg shadow-yellow-500/20 group-hover:shadow-yellow-500/30 transition-all"></div>
@@ -342,7 +313,6 @@ export default function AboutSection() {
         </div>
       </div>
       
-      {/* CSS for animations */}
       <style jsx>{`
         @keyframes float {
           0% { transform: translateY(0px); }
