@@ -17,7 +17,6 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentSection, setCurrentSection] = useState('home');
   
-  // Add refs for each section
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const whyNauthRef = useRef(null);
@@ -25,17 +24,15 @@ export default function Home() {
   const technologyRef = useRef(null);
   const roadmapRef = useRef(null);
 
-  // Handle navbar background change on scroll
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50); // adjust threshold as you like
+      setIsScrolled(window.scrollY > 50); 
     };
   
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Handle URL path change on section visibility
   useEffect(() => {
     const sectionRefs = [
       { id: 'home', ref: homeRef },
@@ -47,9 +44,9 @@ export default function Home() {
     ];
 
     const observerOptions = {
-      root: null, // use viewport as root
+      root: null, 
       rootMargin: '0px',
-      threshold: 0.3 // Reduced threshold to 30%
+      threshold: 0.3 
     };
 
     const observerCallback = (entries) => {
@@ -58,10 +55,10 @@ export default function Home() {
           const sectionId = entry.target.id;
           setCurrentSection(sectionId);
           
-          // Log for debugging
+        
           console.log(`Section in view: ${sectionId}`);
           
-          // Update URL without reloading the page - just use the section ID
+        
           if (sectionId === 'home') {
             window.history.replaceState(null, '', '/');
           } else {
@@ -72,8 +69,6 @@ export default function Home() {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    // Observe all sections
     sectionRefs.forEach(({ id, ref }) => {
       if (ref.current) {
         observer.observe(ref.current);
@@ -92,7 +87,6 @@ export default function Home() {
     };
   }, []);
 
-  // Add a scroll listener specifically for the roadmap section
   useEffect(() => {
     const checkRoadmapVisibility = () => {
       if (!roadmapRef.current) return;
@@ -114,7 +108,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#0e0420] text-white overflow-hidden relative">
-      {/* Navigation */}
+
       <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-purple/70 backdrop-blur-md shadow-md' : 'bg-transparent'} h-16`}>
         <div className="container mx-auto px-4 py-4 h-full flex justify-between items-center pt-8">
           <Image 
@@ -149,14 +143,12 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button - Only visible on mobile */}
           <div className="md:hidden">
             <MobileNavbar />
           </div>
         </div>
       </header>
 
-      {/* Sections - Added refs to each section */}
       <section id="home" ref={homeRef}>
         <HomeSection />
       </section>
@@ -177,17 +169,14 @@ export default function Home() {
         <TechnologySection />
       </section>
 
-      {/* Added data-section attribute for additional identifier */}
       <section id="roadmap" ref={roadmapRef} data-section="roadmap">
         <RoadmapSection />
       </section>
 
-      {/* Partners */}
       <div className="container mx-auto px-4 py-8 border-t border-gray-800">
         <Footer />
       </div>
 
-      {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[20%] left-[10%] w-2 h-2 rounded-full bg-purple-500 opacity-30"></div>
         <div className="absolute top-[40%] left-[20%] w-3 h-3 rounded-full bg-blue-500 opacity-20"></div>
